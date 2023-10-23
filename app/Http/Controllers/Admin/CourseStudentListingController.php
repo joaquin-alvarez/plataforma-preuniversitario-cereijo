@@ -11,6 +11,7 @@ class CourseStudentListingController extends Controller
     public function create (Course $course)
     {
         return view('admin.student-listing', [
+            'course' => $course->course,
             'students' => $course->students,
         ]);
     }

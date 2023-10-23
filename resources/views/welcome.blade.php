@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>{{ $title ?? 'Comunicados Cereijo' }}</title>
-        @vite('resources/css/app.css')
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="antialiased">
         login form

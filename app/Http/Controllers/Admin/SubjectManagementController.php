@@ -13,8 +13,8 @@ class SubjectManagementController extends Controller
         return $subject;
     }
 
-    public function update(Request $request)
+    public function update(Request $request, Subject $subject)
     {
-        return 'TODO: implement resource update';
+
     }
 }

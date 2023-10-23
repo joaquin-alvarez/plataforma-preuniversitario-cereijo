@@ -38,8 +38,7 @@ Route::group([
 
     route::get('ver-materias', [SubjectListingController::class, 'create'])->name('subject.index');
     route::get('ver-materias/{course}', [CourseSubjectListingController::class, 'create'])->name('course.subject.index');
-    route::get('gestionar-materia/{subject}', [SubjectManagementController::class, 'create'])->name('subject.edit');
-    route::put('gestionar-materia', [SubjectManagementController::class, 'update'])->name('subject.update');
+    route::put('alternar-calificable/{subject}', [SubjectManagementController::class, 'update'])->name('subject.grade.update');
 
     route::get('ver-estudiantes', [StudentListingController::class, 'create'])->name('student.index');
     route::get('ver-estudiantes/{course}', [CourseStudentListingController::class, 'create'])->name('course.student.index');

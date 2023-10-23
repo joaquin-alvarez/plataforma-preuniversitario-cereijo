@@ -11,11 +11,16 @@
 
             <x-page-header :title="$title" :message="$message" />
 
-            <div class="w-full flex-grow pt-10">
+            <div class="w-full flex-grow pt-10" x-data="{ checked: false, }">
                 <div class="overflow-x-auto">
                     <table class="table">
                         <thead>
                         <tr>
+                            <th>
+                                <label>
+                                    <input class="checkbox" type="checkbox" x-model="checked" />
+                                </label>
+                            </th>
                             <th>Materia</th>
                             @unless(isset($course))
                                 <td>Curso</td>
@@ -27,6 +32,11 @@
                         <tbody>
                         @foreach($subjects as $subject)
                             <tr>
+                                <td>
+                                    <label>
+                                        <input class="checkbox" type="checkbox" x-model="checked" />
+                                    </label>
+                                </td>
                                 <td>{{ $subject->name }}</td>
                                 @unless(isset($course))
                                     <td>{{ $subject->course->course }}</td>
@@ -34,11 +44,11 @@
                                 <td>{{ $subject->teacher->proper_full_name }}</td>
                                 <td>
                                     <button class="btn btn-info btn-xs">
-                                        <a href={{ route('admin.subject.edit', ['subject' => $subject]) }}>cambiar docente</a>
+                                        <a href={{ route('admin.subject.grade.update', ['subject' => $subject]) }}>cambiar docente</a>
                                     </button>
-                                    {{--                                    <button class="btn btn-accent btn-xs">
-                                                                            <a href={{ route('teacher.edit-subject-tests', ['subject' => $subject]) }}>calificar</a>
-                                                                        </button>--}}
+                                    <button class="btn btn-accent btn-xs">
+                                        <a href={{ route('admin.subject.grade.update', ['subject' => $subject]) }}>abrir calificaciones</a>
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -46,6 +56,12 @@
                     </table>
                 </div>
             </div>
+
         </div>
     </div>
+    <script>
+        function toggleGradeable() {
+
+        }
+    </script>
 </x-layouts.app>
