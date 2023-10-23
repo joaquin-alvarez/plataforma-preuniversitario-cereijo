@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CourseManagementController;
 use App\Http\Controllers\Admin\CourseStudentListingController;
 use App\Http\Controllers\Admin\CourseSubjectListingController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\GradeManagementController;
 use App\Http\Controllers\Admin\StudentListingController;
 use App\Http\Controllers\Admin\StudentManagementController;
 use App\Http\Controllers\Admin\SubjectListingController;
@@ -38,7 +39,8 @@ Route::group([
 
     route::get('ver-materias', [SubjectListingController::class, 'create'])->name('subject.index');
     route::get('ver-materias/{course}', [CourseSubjectListingController::class, 'create'])->name('course.subject.index');
-    route::put('alternar-calificable/{subject}', [SubjectManagementController::class, 'update'])->name('subject.grade.update');
+    
+    route::get('gestionar-periodos', [GradeManagementController::class, 'create'])->name('grading.index');
 
     route::get('ver-estudiantes', [StudentListingController::class, 'create'])->name('student.index');
     route::get('ver-estudiantes/{course}', [CourseStudentListingController::class, 'create'])->name('course.student.index');

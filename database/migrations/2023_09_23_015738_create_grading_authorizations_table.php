@@ -13,16 +13,15 @@ return new class extends Migration
     {
         Schema::create('grading_authorizations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_grade_id');
-            $table->enum('score_column', [
-                'period_1_score',
-                'period_2_score',
-                'period_3_score',
-                'extra_exam_1_score',
-                'extra_exam_2_score',
+            $table->enum('period', [
+                'period_1',
+                'period_2',
+                'period_3',
+                'extra_exam_1',
+                'extra_exam_2',
                 'final_score',
             ]);
-            $table->boolean('authorization_state')->default(true);
+            $table->boolean('state')->default(false);
             $table->timestamps();
         });
     }

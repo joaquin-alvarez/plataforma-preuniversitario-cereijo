@@ -102,6 +102,15 @@ class DatabaseSeeder extends Seeder
             return ['course_id' => $id];
         })
         ))->create();
+
+        DB::table('grading_authorizations')->insert([
+            [ 'period' => 'period_1', 'state' => false],
+            [ 'period' => 'period_2', 'state' => false],
+            [ 'period' => 'period_3', 'state' => false],
+            [ 'period' => 'extra_exam_1', 'state' => false],
+            [ 'period' => 'extra_exam_2', 'state' => false],
+            [ 'period' => 'final_score', 'state' => false]
+        ]);
     }
 }
     

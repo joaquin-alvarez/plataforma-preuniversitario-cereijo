@@ -27,10 +27,6 @@ return new class extends Migration
 
             $table->index(['student_dni', 'subject_id']);
         });
-
-        Schema::table('grading_authorizations', function (Blueprint $table) {
-            $table->foreign('student_grade_id')->references('id')->on('student_grades')->onDelete('cascade');
-        });
     }
 
     /**
