@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             ['role' => 'TEACHER'],
             ['role' => 'STUDENT'],
         ]);
-        
+
         DB::table('courses')->insert([
             ['course' => '1A'],
             ['course' => '1B'],
@@ -52,13 +52,13 @@ class DatabaseSeeder extends Seeder
             ['course' => '6C'],
             ['course' => '6D'],
         ]);
-        
+
         $subjects = Subject::factory(144)->state(state: new Sequence(
             ...Course::all(['id'])->pluck('id')->map(function ($id) {
                 return ['course_id' => $id];
             })
         ));
-        
+
         User::factory()->createMany([
             [
                 'dni' => 36331327,
@@ -82,15 +82,15 @@ class DatabaseSeeder extends Seeder
                 'password' => Hash::make('123')
             ],
         ]);
-        
+
         User::factory(6)->create([
             'role_id' => Role::ADMIN,
         ]);
-        
+
         User::factory(60)->create([
             'role_id' => Role::TEACHER,
         ]);
-        
+
         $subjects->state(state: new Sequence(
         ...User::where('role_id', Role::TEACHER)->pluck('dni')->map(function ($dni) {
             return ['teacher_dni' => $dni];
@@ -102,15 +102,5 @@ class DatabaseSeeder extends Seeder
             return ['course_id' => $id];
         })
         ))->create();
-
-        DB::table('grading_authorizations')->insert([
-            [ 'period' => 'period_1', 'state' => false],
-            [ 'period' => 'period_2', 'state' => false],
-            [ 'period' => 'period_3', 'state' => false],
-            [ 'period' => 'extra_exam_1', 'state' => false],
-            [ 'period' => 'extra_exam_2', 'state' => false],
-            [ 'period' => 'final_score', 'state' => false]
-        ]);
     }
 }
-    

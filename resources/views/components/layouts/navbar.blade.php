@@ -22,7 +22,6 @@
         <ul class="menu menu-horizontal px-1">
             @can('navigate-as-admin')
                 <li><a href={{ route('admin.course.index') }}>Cursos</a></li>
-                <li><a href={{ route('admin.grading.index') }}>Periodos de Calificaciones</a></li>
                 <li tabindex="0">
                     <details>
                         <summary>Usuarios</summary>

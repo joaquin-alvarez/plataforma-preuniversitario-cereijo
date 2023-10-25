@@ -39,8 +39,6 @@ Route::group([
 
     route::get('ver-materias', [SubjectListingController::class, 'create'])->name('subject.index');
     route::get('ver-materias/{course}', [CourseSubjectListingController::class, 'create'])->name('course.subject.index');
-    
-    route::get('gestionar-periodos', [GradeManagementController::class, 'create'])->name('grading.index');
 
     route::get('ver-estudiantes', [StudentListingController::class, 'create'])->name('student.index');
     route::get('ver-estudiantes/{course}', [CourseStudentListingController::class, 'create'])->name('course.student.index');
