@@ -1,15 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\CourseListingController;
-use App\Http\Controllers\Admin\CourseManagementController;
 use App\Http\Controllers\Admin\CourseStudentListingController;
 use App\Http\Controllers\Admin\CourseSubjectListingController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
-use App\Http\Controllers\Admin\GradeManagementController;
-use App\Http\Controllers\Admin\StudentListingController;
+use App\Http\Controllers\Admin\GradableAuthorizationController;
 use App\Http\Controllers\Admin\StudentManagementController;
 use App\Http\Controllers\Admin\SubjectListingController;
-use App\Http\Controllers\Admin\SubjectManagementController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,6 +40,8 @@ Route::group([
     route::get('ver-estudiantes', [StudentListingController::class, 'create'])->name('student.index');
     route::get('ver-estudiantes/{course}', [CourseStudentListingController::class, 'create'])->name('course.student.index');
     route::get('gestionar-estudiante/{user}', [StudentManagementController::class, 'create'])->name('student.edit');
+
+    route::put('gestionar-calificables', [GradableAuthorizationController::class, 'update'])->name('gradable.update');
 });
 
 Route::middleware('auth')->group(function (){

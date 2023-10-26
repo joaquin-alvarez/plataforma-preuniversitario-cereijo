@@ -20,6 +20,15 @@ class DatabaseSeeder extends Seeder
     */
     public function run(): void
     {
+        DB::table('gradable_authorizations')->insert([
+            ['student_grade_column' => 'period_1_score'],
+            ['student_grade_column' => 'period_2_score'],
+            ['student_grade_column' => 'period_3_score'],
+            ['student_grade_column' => 'extra_exam_1_score'],
+            ['student_grade_column' => 'extra_exam_2_score'],
+            ['student_grade_column' => 'final_score']
+        ]);
+
         DB::table('roles')->insert([
             ['role' => 'ADMIN'],
             ['role' => 'TEACHER'],
