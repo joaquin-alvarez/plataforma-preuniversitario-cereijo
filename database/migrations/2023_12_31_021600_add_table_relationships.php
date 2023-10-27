@@ -25,7 +25,23 @@ return new class extends Migration
             $table->foreign('student_dni')->references('dni')->on('users')->onDelete('cascade');
             $table->foreign('subject_id')->references('id')->on('subjects');
 
-            $table->index(['student_dni', 'subject_id']);
+            $table->unique(['student_dni', 'subject_id']);
+        });
+
+        Schema::table('student_guardians', function (Blueprint $table) {
+            $table->primary(['dni']);
+        });
+
+        Schema::table('student_guardian_user', function (Blueprint $table) {
+            $table->foreign('user_dni')->references('dni')->on('users');
+            $table->foreign('student_guardian_dni')->references('dni')->on('student_guardians');
+
+            $table->unique(['user_dni', 'student_guardian_dni']);
+        });
+
+        Schema::table('student_withdrawals', function (Blueprint $table) {
+            $table->foreign('student_dni')->references('dni')->on('users');
+            $table->foreign('student_guardian_dni')->references('dni')->on('student_guardians');
         });
     }
 

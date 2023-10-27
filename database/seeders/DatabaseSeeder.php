@@ -5,6 +5,8 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Course;
+use App\Models\StudentGuardian;
+use App\Models\StudentWithdrawal;
 use App\Models\Subject;
 use App\Models\Support\Role;
 use App\Models\User;
@@ -107,9 +109,10 @@ class DatabaseSeeder extends Seeder
         ))->create();
 
         User::factory(480)->state(new Sequence(
-        ...Course::all(['id'])->pluck('id')->map(function ($id) {
-            return ['course_id' => $id];
-        })
-        ))->create();
+            ...Course::all(['id'])->pluck('id')->map(function ($id) {
+                return ['course_id' => $id];
+            })
+        ))->has(StudentGuardian::factory(2))
+        ->create();
     }
 }
