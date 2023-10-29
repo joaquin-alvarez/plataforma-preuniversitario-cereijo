@@ -12,7 +12,7 @@ class StudentListingController extends Controller
     public function create()
     {
         return view('admin.student-listing', [
-            'students' => User::where('role_id', Role::STUDENT),
+            'students' => User::where('role_id', Role::STUDENT)->get(['dni']),
         ]);
     }
 }

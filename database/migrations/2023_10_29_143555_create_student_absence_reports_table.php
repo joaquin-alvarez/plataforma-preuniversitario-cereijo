@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('student_withdrawals', function (Blueprint $table) {
+        Schema::create('student_absence_reports', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('student_dni');
-            $table->unsignedBigInteger('student_guardian_dni');
-            $table->dateTime('datetime');
+            $table->date('date_of_absence');
             $table->text('comment')->nullable();
+            $table->boolean('is_justified')->default(false);
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('student_withdrawals');
+        Schema::dropIfExists('student_absence_reports');
     }
 };

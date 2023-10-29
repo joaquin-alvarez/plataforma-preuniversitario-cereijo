@@ -110,9 +110,14 @@ class DatabaseSeeder extends Seeder
 
         User::factory(480)->state(new Sequence(
             ...Course::all(['id'])->pluck('id')->map(function ($id) {
-                return ['course_id' => $id];
+                return [
+                    'course_id' => $id,
+                    'role_id' => Role::STUDENT,
+                ];
             })
         ))->has(StudentGuardian::factory(2))
         ->create();
+
+        StudentWithdrawal::factory(800)->create();
     }
 }

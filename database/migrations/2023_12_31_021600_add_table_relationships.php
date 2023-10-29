@@ -33,8 +33,8 @@ return new class extends Migration
         });
 
         Schema::table('student_guardian_user', function (Blueprint $table) {
-            $table->foreign('user_dni')->references('dni')->on('users');
-            $table->foreign('student_guardian_dni')->references('dni')->on('student_guardians');
+            $table->foreign('student_guardian_dni')->references('dni')->on('student_guardians')->onDelete('cascade');
+            $table->foreign('user_dni')->references('dni')->on('users')->onDelete('cascade');
 
             $table->unique(['user_dni', 'student_guardian_dni']);
         });
@@ -42,6 +42,25 @@ return new class extends Migration
         Schema::table('student_withdrawals', function (Blueprint $table) {
             $table->foreign('student_dni')->references('dni')->on('users');
             $table->foreign('student_guardian_dni')->references('dni')->on('student_guardians');
+        });
+
+        Schema::table('student_absence_reports', function (Blueprint $table) {
+            $table->foreign('student_dni')->references('dni')->on('users')->onDelete('cascade');
+        });
+
+        Schema::table('student_grades_reports', function (Blueprint $table) {
+            $table->foreign('student_dni')->references('dni')->on('users')->onDelete('cascade');
+
+            $table->unique(['student_dni']);
+        });
+
+        Schema::table('posts', function (Blueprint $table) {
+            $table->foreign('user_dni')->references('dni')->on('users')->onDelete('cascade');
+            $table->foreign('course_id')->references('id')->on('courses');
+        });
+
+        Schema::table('post_attachments', function (Blueprint $table) {
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
     }
 

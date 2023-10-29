@@ -2,12 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\Support\Role;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\StudentGuardian>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Storage\Storage\Storage\StudentGuardian>
  */
 class StudentGuardianFactory extends Factory
 {

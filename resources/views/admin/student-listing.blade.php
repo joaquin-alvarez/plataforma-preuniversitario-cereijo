@@ -4,9 +4,10 @@
     <div class="container mx-auto">
         <div class="flex flex-col gap-6 justify-between pb-16">
 
-            <x-page-header title="Alumnos de {{ $course }}" />
+            <x-page-header title="Alumnos" />
+            {{ $students }}
 
-            <div x-data="filterTable(['dni', 'last_name'])">
+{{--            <div x-data="filterTable(['dni', 'last_name'])">
                 <div class="w-full flex-grow">
 
                     <div class="mb-5">
@@ -39,7 +40,7 @@
                     </div>
 
                 </div>
-            </div>
+            </div>--}}
 
         </div>
     </div>

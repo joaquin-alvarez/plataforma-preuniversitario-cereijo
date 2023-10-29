@@ -3,13 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\StudentGuardian;
-use App\Models\StudentWithdrawal;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\StudentWithdrawal>
- */
 class StudentWithdrawalFactory extends Factory
 {
     /**
@@ -19,7 +14,12 @@ class StudentWithdrawalFactory extends Factory
      */
     public function definition(): array
     {
+        $studentGuardian = StudentGuardian::all()->random();
+
         return [
+            'student_guardian_dni' => $studentGuardian->dni,
+            'student_dni' => $studentGuardian->students()->inRandomOrder()->first(['dni']),
+            'datetime' => fake()->dateTimeBetween('now', '+1 year'),
             'comment' => fake()->randomElement([null, fake()->realText]),
         ];
     }

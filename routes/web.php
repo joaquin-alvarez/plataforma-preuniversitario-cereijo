@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CourseStudentListingController;
 use App\Http\Controllers\Admin\CourseSubjectListingController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\GradableAuthorizationController;
+use App\Http\Controllers\Admin\StudentListingController;
 use App\Http\Controllers\Admin\StudentManagementController;
 use App\Http\Controllers\Admin\SubjectListingController;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,8 @@ Route::group([
     route::get('gestionar-estudiante/{user}', [StudentManagementController::class, 'create'])->name('student.edit');
 
     route::put('gestionar-calificables', [GradableAuthorizationController::class, 'update'])->name('gradable.update');
+
+    //route::post('subir-archivo', [\App\Http\Controllers\Storage\UserFileController::class, 'store'])->name('file.store');
 });
 
 Route::middleware('auth')->group(function (){

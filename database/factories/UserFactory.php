@@ -6,9 +6,6 @@ use App\Models\Support\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
- */
 class UserFactory extends Factory
 {
     /**
@@ -19,7 +16,7 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'dni' => fake()->unique()->numberBetween(999999, 99999999),
+            'dni' => fake()->unique()->numberBetween(9999999, 99999999),
             'role_id' => Role::all(['id'])->random(),
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
