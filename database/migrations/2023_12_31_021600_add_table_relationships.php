@@ -48,7 +48,7 @@ return new class extends Migration
             $table->foreign('student_dni')->references('dni')->on('users')->onDelete('cascade');
         });
 
-        Schema::table('student_grades_reports', function (Blueprint $table) {
+        Schema::table('student-grades-reports', function (Blueprint $table) {
             $table->foreign('student_dni')->references('dni')->on('users')->onDelete('cascade');
 
             $table->unique(['student_dni']);
@@ -59,7 +59,7 @@ return new class extends Migration
             $table->foreign('course_id')->references('id')->on('courses');
         });
 
-        Schema::table('post_attachments', function (Blueprint $table) {
+        Schema::table('post-attachments', function (Blueprint $table) {
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
     }

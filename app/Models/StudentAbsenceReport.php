@@ -11,6 +11,8 @@ class StudentAbsenceReport extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function documents(): MorphMany
     {
         return $this->morphMany(Document::class, 'commentable');

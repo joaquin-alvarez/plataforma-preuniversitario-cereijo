@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Support\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,7 @@ class DashboardController extends Controller
     {
         return view('admin.dashboard', [
             'states' => DB::table('gradable_authorizations')->get(),
-            'users' => User::all()->random(40), //TESTING
+            'students' => User::where('role_id', Role::STUDENT)->get(), //TESTING
         ]);
     }
 }

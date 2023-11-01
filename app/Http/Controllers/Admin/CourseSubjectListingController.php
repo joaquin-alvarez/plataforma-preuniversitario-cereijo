@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
-use App\Models\Subject;
 use Illuminate\Http\Request;
 
 class CourseSubjectListingController extends Controller

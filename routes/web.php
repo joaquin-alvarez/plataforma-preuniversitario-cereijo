@@ -44,7 +44,10 @@ Route::group([
 
     route::put('gestionar-calificables', [GradableAuthorizationController::class, 'update'])->name('gradable.update');
 
-    //route::post('subir-archivo', [\App\Http\Controllers\Storage\UserFileController::class, 'store'])->name('file.store');
+    // RUTAS TESTING
+    route::post('subir-reporte', [\App\Http\Controllers\Storage\StudentGradesReportController::class, 'store'])->name('student_grades_report.store');
+    route::post('guardar-ausencia', [\App\Http\Controllers\Admin\StudentAbsenceReportController::class, 'store'])->name('student_absence_report.store');
+    //FIN RUTAS TESTING
 });
 
 Route::middleware('auth')->group(function (){
