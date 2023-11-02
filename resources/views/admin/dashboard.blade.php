@@ -66,9 +66,9 @@
                     <input class="input input-bordered" type="text" id="comment" name="comment"><br><br>
 
                     <label for="is_justified">Esta justificada:</label>
-                    <input type="radio" id="no" name="is_justified" value=false @checked(true)>
+                    <input type="radio" id="no" name="is_justified" value="0" @checked(true)>
                     <label for="no">No</label>
-                    <input type="radio" id="yes" name="is_justified" value=true>
+                    <input type="radio" id="yes" name="is_justified" value="1" >
                     <label for="yes">Si</label><br><br>
 
                     <button class="btn-sm btn-primary" type="submit" >Save</button>

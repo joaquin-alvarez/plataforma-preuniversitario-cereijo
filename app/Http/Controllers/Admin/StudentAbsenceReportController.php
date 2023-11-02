@@ -44,7 +44,7 @@ class StudentAbsenceReportController extends Controller
             'is_justified' => $request->is_justified,
         ]);
 
-        return redirect( route('admin.dashboard'));
+        return redirect( route('admin.dashboard') );
     }
 
     /**
@@ -52,7 +52,9 @@ class StudentAbsenceReportController extends Controller
      */
     public function show(StudentAbsenceReport $studentAbsenceReport)
     {
-        //
+        return redirect( route('admin.dashboard'), [
+            'student_absence_report' => $studentAbsenceReport,
+        ]);
     }
 
     /**
@@ -68,14 +70,28 @@ class StudentAbsenceReportController extends Controller
      */
     public function update(Request $request, StudentAbsenceReport $studentAbsenceReport)
     {
-        //
+        $request->validate([
+            'date_of_absence' => 'required|date',
+            'comment' => 'max:200',
+            'is_justified' => 'required|in:0,1',
+        ]);
+
+        $studentAbsenceReport->update([
+            'date_of_absence' => $request->date_of_absence,
+            'comment' => $request->comment,
+            'is_justified' => $request->is_justified,
+        ]);
+
+        return redirect( route('admin.dashboard') );
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(StudentAbsenceReport $studentAbsenceReport)
+    public function destroy(StudentAbsenceReport $studentAbsenceReport): RedirectResponse
     {
-        //
+        StudentAbsenceReport::destroy($studentAbsenceReport);
+
+        return redirect( route('admin.dashboard') );
     }
 }
