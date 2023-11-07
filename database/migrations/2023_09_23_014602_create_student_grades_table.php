@@ -15,12 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('student_dni');
             $table->unsignedBigInteger('subject_id');
-            $table->decimal('period_1_score', 2, 1, true)->nullable();
-            $table->decimal('period_2_score', 2, 1, true)->nullable();
-            $table->decimal('period_3_score', 2, 1, true)->nullable();
-            $table->decimal('extra_exam_1_score', 2, 1, true)->nullable();
-            $table->decimal('extra_exam_2_score', 2, 1, true)->nullable();
-            $table->tinyInteger('final_score')->nullable();
+            $table->unsignedBigInteger('gradable_period_id');
+            $table->decimal('score', 2, 1, true);
+            $table->boolean('gradable')->default(true);
             $table->timestamps();
         });
     }

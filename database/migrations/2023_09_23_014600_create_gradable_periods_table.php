@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gradable_authorizations', function (Blueprint $table) {
+        Schema::create('gradable_periods', function (Blueprint $table) {
             $table->id();
-            $table->string('student_grade_column');
-            $table->boolean('state')->default(false);
+            $table->string('period');
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gradable_authorizations');
+        Schema::dropIfExists('grading_periods');
     }
 };

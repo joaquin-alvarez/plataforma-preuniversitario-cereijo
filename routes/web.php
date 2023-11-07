@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\GradableAuthorizationController;
 use App\Http\Controllers\Admin\StudentListingController;
 use App\Http\Controllers\Admin\StudentManagementController;
 use App\Http\Controllers\Admin\SubjectListingController;
+use App\Http\Controllers\Teacher\DashboardController as TeacherDashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,9 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->middleware('auth');
+Route::permanentRedirect('/', '/logout');
 
 Route::group([
     'middleware' => ['auth', 'can:navigate-as-admin'],
@@ -49,6 +48,15 @@ Route::group([
     route::post('guardar-ausencia', [\App\Http\Controllers\Admin\StudentAbsenceReportController::class, 'store'])->name('student_absence_report.store');
     route::patch('actualizar-ausencia', [\App\Http\Controllers\Admin\StudentAbsenceReportController::class, 'update'])->name('student_absence_report.update');
     //FIN RUTAS TESTING
+});
+
+//RUTAS TESTING DOCENTE
+Route::group([
+    'middleware' => ['auth', 'can:navigate-as-teacher'],
+    'prefix' => '/docente',
+    'as' => 'teacher.',
+], function () {
+   route::get('/', [TeacherDashboardController::class, 'create'])->name('dashboard');
 });
 
 Route::middleware('auth')->group(function (){

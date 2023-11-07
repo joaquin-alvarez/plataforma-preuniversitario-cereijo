@@ -84,8 +84,43 @@
                     @endif
                 </form>
             </div>
-            <div>
-                <span class="font-bold">Testing ver ausentismo</span>
+
+            <div class="flex flex-col" x-data="{
+                students: {{ Js::from($students) }},
+                selected: [],
+                get reports() { try { parsed = JSON.parse(this.selected); } catch(e) { return false; } return parsed; },
+            }" >
+                <div>
+                    <span class="font-bold">Testing ver/editar ausentismo</span><br>
+                    <label>Student DNI:
+                        <select x-model="selected" x-on:change="console.log(reports)">
+                            <template x-for="student in students">
+                                <option x-bind:value="JSON.stringify(student.student_absence_reports)" x-text="student.dni" ></option>
+                            </template>
+                        </select><br><br>
+                    </label>
+                </div>
+                <div>
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>comment</th>
+                            <th>date</th>
+                            <th>justified</th>
+                            <th>controls</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <template x-for="report in reports">
+                            <tr>
+                                <td x-text="report.comment"></td>
+                                <td x-text="report.date_of_absence"></td>
+                                <td x-text="report.is_justified"></td>
+                            </tr>
+                        </template>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

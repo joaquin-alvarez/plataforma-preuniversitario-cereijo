@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 class GradableAuthorizationController extends Controller
 {
-    //TODO: Update to AJAX version
     public function update(Request $request): RedirectResponse
     {
         $request->validate([

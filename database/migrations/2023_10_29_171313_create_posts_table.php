@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_dni');
-            $table->unsignedBigInteger('course_id');
             $table->text('body');
             $table->boolean('open_to_comments')->default(false);
+            $table->unsignedBigInteger('subject_id');
+            $table->unsignedBigInteger('user_dni');
             $table->timestamps();
         });
     }

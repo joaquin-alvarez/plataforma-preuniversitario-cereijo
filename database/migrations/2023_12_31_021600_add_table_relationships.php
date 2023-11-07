@@ -21,11 +21,16 @@ return new class extends Migration
             $table->foreign('teacher_dni')->references('dni')->on('users')->onDelete('set null');
         });
 
+        Schema::table('gradable_periods', function (Blueprint $table) {
+            $table->unique('period');
+        });
+
         Schema::table('student_grades', function (Blueprint $table) {
             $table->foreign('student_dni')->references('dni')->on('users')->onDelete('cascade');
             $table->foreign('subject_id')->references('id')->on('subjects');
+            $table->foreign('gradable_period_id')->references('id')->on('gradable_periods');
 
-            $table->unique(['student_dni', 'subject_id']);
+            $table->unique(['student_dni', 'subject_id', 'gradable_period_id']);
         });
 
         Schema::table('student_guardians', function (Blueprint $table) {
@@ -48,7 +53,7 @@ return new class extends Migration
             $table->foreign('student_dni')->references('dni')->on('users')->onDelete('cascade');
         });
 
-        Schema::table('student-grades-reports', function (Blueprint $table) {
+        Schema::table('student_grades_reports', function (Blueprint $table) {
             $table->foreign('student_dni')->references('dni')->on('users')->onDelete('cascade');
 
             $table->unique(['student_dni']);
@@ -56,11 +61,16 @@ return new class extends Migration
 
         Schema::table('posts', function (Blueprint $table) {
             $table->foreign('user_dni')->references('dni')->on('users')->onDelete('cascade');
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
         });
 
-        Schema::table('post-attachments', function (Blueprint $table) {
+        Schema::table('post_attachments', function (Blueprint $table) {
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+        });
+
+        Schema::table('announcement_course', function (Blueprint $table) {
+            $table->foreign('announcement_id')->references('id')->on('announcements')->onDelete('cascade');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
         });
     }
 

@@ -4,7 +4,10 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Announcement;
 use App\Models\Course;
+use App\Models\GradablePeriod;
+use App\Models\Post;
 use App\Models\StudentGuardian;
 use App\Models\StudentWithdrawal;
 use App\Models\Subject;
@@ -22,15 +25,6 @@ class DatabaseSeeder extends Seeder
     */
     public function run(): void
     {
-        DB::table('gradable_authorizations')->insert([
-            ['student_grade_column' => 'period_1_score'],
-            ['student_grade_column' => 'period_2_score'],
-            ['student_grade_column' => 'period_3_score'],
-            ['student_grade_column' => 'extra_exam_1_score'],
-            ['student_grade_column' => 'extra_exam_2_score'],
-            ['student_grade_column' => 'final_score']
-        ]);
-
         DB::table('roles')->insert([
             ['role' => 'ADMIN'],
             ['role' => 'TEACHER'],
@@ -62,6 +56,15 @@ class DatabaseSeeder extends Seeder
             ['course' => '6B'],
             ['course' => '6C'],
             ['course' => '6D'],
+        ]);
+
+        GradablePeriod::factory()->createMany([
+            ['period' => 'first_quarter'],
+            ['period' => 'second_quarter'],
+            ['period' => 'third_quarter'],
+            ['period' => 'first_extra'],
+            ['period' => 'second_extra'],
+            ['period' => 'final'],
         ]);
 
         $subjects = Subject::factory(144)->state(state: new Sequence(
@@ -119,5 +122,16 @@ class DatabaseSeeder extends Seeder
         ->create();
 
         StudentWithdrawal::factory(800)->create();
+
+        $courses = Course::all();
+        Announcement::factory(3)->hasAttached($courses)->create();
+        Announcement::factory(2)->hasAttached($courses->whereIn('id', [1, 2, 5]))->create();
+
+        foreach (Subject::all() as $subject) {
+            Post::factory(3)->create([
+                'subject_id' => $subject->id,
+                'user_dni' => $subject->teacher->dni,
+            ]);
+        }
     }
 }

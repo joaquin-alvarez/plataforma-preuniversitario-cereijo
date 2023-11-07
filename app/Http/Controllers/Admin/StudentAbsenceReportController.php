@@ -14,7 +14,7 @@ class StudentAbsenceReportController extends Controller
      */
     public function index()
     {
-        //
+        return StudentAbsenceReport::all();
     }
 
     /**
