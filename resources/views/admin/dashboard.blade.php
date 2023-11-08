@@ -2,21 +2,15 @@
     <x-layouts.navbar/>
     <div class="container mx-auto">
         <div>
-            <span class="font-bold">Autorizaciones para calificar</span>
-            <form action="{{ route('admin.gradable.update') }}" method="POST">
+            <span class="font-bold">Test subida de alumnos en bulk</span>
+            <form action="administrador/importar-estudiantes" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
-                <ul class="flex flex-row gap-10">
-                    @foreach ($states as $state)
-                        <li class="flex flex-col">
-                            <label>{{ $state->student_grade_column }}</label>
-                            <input type="hidden" value="0" name="states[{{ $state->student_grade_column }}]">
-                            <input type="checkbox" value="1" name="states[{{ $state->student_grade_column }}]" @checked($state->state)>
-                        </li>
-                    @endforeach
-                </ul>
-                <button class="btn-sm btn-primary mt-2" type="submit">ACTUALIZAR</button>
+
+                <input type="file" name="file" required>
+
+                <button class="btn-sm btn-primary" type="submit">Import</button>
             </form>
+
         </div>
 
         <div class="mt-16">
@@ -121,6 +115,10 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+
+            <div>
+                asdasd
             </div>
         </div>
     </div>

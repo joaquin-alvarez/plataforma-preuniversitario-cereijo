@@ -14,7 +14,7 @@ class DashboardController extends Controller
     public function create()
     {
         return view('admin.dashboard', [
-            'states' => DB::table('gradable_authorizations')->get(),
+
             'students' => User::with('studentAbsenceReports')->where('role_id', Role::STUDENT)->oldest()->get()->take(10), //TESTING
         ]);
     }

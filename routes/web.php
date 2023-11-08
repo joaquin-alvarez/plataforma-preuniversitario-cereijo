@@ -47,6 +47,7 @@ Route::group([
     route::post('subir-reporte', [\App\Http\Controllers\Storage\StudentGradesReportController::class, 'store'])->name('student_grades_report.store');
     route::post('guardar-ausencia', [\App\Http\Controllers\Admin\StudentAbsenceReportController::class, 'store'])->name('student_absence_report.store');
     route::patch('actualizar-ausencia', [\App\Http\Controllers\Admin\StudentAbsenceReportController::class, 'update'])->name('student_absence_report.update');
+    route::post('importar-estudiantes', [\App\Http\Controllers\Admin\UsersImportController::class, 'excel']);
     //FIN RUTAS TESTING
 });
 
