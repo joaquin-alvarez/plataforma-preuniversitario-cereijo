@@ -21,8 +21,8 @@ use Illuminate\Support\Facades\Hash;
 class DatabaseSeeder extends Seeder
 {
     /**
-    * Seed the application's database.
-    */
+     * Seed the application's database.
+     */
     public function run(): void
     {
         DB::table('roles')->insert([
@@ -79,21 +79,21 @@ class DatabaseSeeder extends Seeder
                 'first_name' => 'Joaquín',
                 'last_name' => 'Alvarez',
                 'role_id' => Role::ADMIN,
-                'password' => Hash::make('123')
+                'password' => Hash::make('123'),
             ],
             [
                 'dni' => 36331328,
                 'first_name' => 'Joaquín',
                 'last_name' => 'Alvarez',
                 'role_id' => Role::TEACHER,
-                'password' => Hash::make('123')
+                'password' => Hash::make('123'),
             ],
             [
                 'dni' => 36331329,
                 'first_name' => 'Joaquín',
                 'last_name' => 'Alvarez',
                 'role_id' => Role::STUDENT,
-                'password' => Hash::make('123')
+                'password' => Hash::make('123'),
             ],
         ]);
 
@@ -106,9 +106,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $subjects->state(state: new Sequence(
-        ...User::where('role_id', Role::TEACHER)->pluck('dni')->map(function ($dni) {
-            return ['teacher_dni' => $dni];
-        })
+            ...User::where('role_id', Role::TEACHER)->pluck('dni')->map(function ($dni) {
+                return ['teacher_dni' => $dni];
+            })
         ))->create();
 
         User::factory(480)->state(new Sequence(
@@ -119,7 +119,7 @@ class DatabaseSeeder extends Seeder
                 ];
             })
         ))->has(StudentGuardian::factory(2))
-        ->create();
+            ->create();
 
         StudentWithdrawal::factory(800)->create();
 

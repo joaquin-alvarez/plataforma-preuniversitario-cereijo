@@ -10,7 +10,7 @@ class Announcement extends Model
 {
     use HasFactory;
 
-    public function courses() : BelongsToMany
+    public function courses(): BelongsToMany
     {
         return $this->belongsToMany(Course::class);
     }

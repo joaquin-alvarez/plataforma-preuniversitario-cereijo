@@ -12,12 +12,12 @@ class Post extends Model
 
     protected $guarded = [];
 
-    public function course() : BelongsTo
+    public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
     }
 
-    public function user() : BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

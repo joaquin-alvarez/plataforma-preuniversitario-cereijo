@@ -15,7 +15,7 @@ class StudentAbsenceReportListingController extends Controller
     public function index()
     {
         return view(route('admin.dashboard'), [
-           'all_student_absence_reports' => StudentAbsenceReport::all(),
+            'all_student_absence_reports' => StudentAbsenceReport::all(),
         ]);
     }
 

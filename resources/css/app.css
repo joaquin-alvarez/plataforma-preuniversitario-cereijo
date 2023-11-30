@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.filter-input::placeholder {
+    color: #4a5568;
+}
+
+.filter-input:focus-within {
+    outline-offset: 0;
+}
+
+[x-cloak] { display: none !important; }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Storage;
 
 use App\Http\Controllers\Controller;
 use App\Models\Storage\StudentGradesReport;
-use Illuminate\Http\File;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -34,7 +33,7 @@ class StudentGradesReportController extends Controller
     {
         $request->validate([
             'student_dni' => 'required|numeric',
-            'file' => 'required|file'
+            'file' => 'required|file',
         ]);
 
         $path = $request->file('file')->store('student-grades-reports');

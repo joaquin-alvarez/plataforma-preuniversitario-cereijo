@@ -10,7 +10,7 @@ class StudentGrade extends Model
 {
     use HasFactory;
 
-    public function gradablePeriod() : BelongsTo
+    public function gradablePeriod(): BelongsTo
     {
         return $this->belongsTo(GradablePeriod::class, 'gradable_period', 'period');
     }

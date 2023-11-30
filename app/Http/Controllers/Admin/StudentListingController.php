@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Support\Role;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class StudentListingController extends Controller
 {

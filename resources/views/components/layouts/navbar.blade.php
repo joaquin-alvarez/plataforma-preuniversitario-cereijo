@@ -21,17 +21,25 @@
     <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal px-1">
             @can('navigate-as-admin')
-                <li><a href={{ route('admin.course.index') }}>Cursos</a></li>
+                <li tabindex="0">
+                    <details>
+                        <summary>Materias</summary>
+                        <ul class="p-2">
+                            <li><a href="{{ route('admin.subject_management.create') }}">Cambio de docente</a></li>
+                        </ul>
+                    </details>
+                </li>
                 <li tabindex="0">
                     <details>
                         <summary>Usuarios</summary>
                         <ul class="p-2">
-                            <li><a>Cambio de contraseña</a></li>
-                            <li><a>Nuevo usuario</a></li>
-                            <li><a>Eliminar usuario</a></li>
+                            <li><a href="{{ route('admin.user.create') }}">Nuevo usuario</a></li>
+                            <li><a href="{{ route('admin.user.edit') }}">Editar usuario</a></li>
+                            <li><a href="{{ route('admin.user.delete') }}">Eliminar usuario</a></li>
                         </ul>
                     </details>
                 </li>
+                <li><a href="{{ route('admin.bulk_uploads.create') }}">Carga de datos</a></li>
             @endcan
             @can('navigate-as-teacher')
                 <li><a>Cursos</a></li>

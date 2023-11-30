@@ -11,17 +11,17 @@ class Subject extends Model
 {
     use HasFactory;
 
-    public function course() : BelongsTo
+    public function course(): BelongsTo
     {
         return $this->belongsTo(Course::class);
     }
 
-    public function posts() : HasMany
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }
 
-    public function teacher() : BelongsTo
+    public function teacher(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

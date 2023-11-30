@@ -22,11 +22,10 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return match (Auth::user()->role_id)
-                {
-                    Role::ADMIN => redirect( route(RouteServiceProvider::ADMIN_HOME) ),
-                    Role::TEACHER => redirect( route(RouteServiceProvider::TEACHER_HOME) ),
-                    Role::STUDENT => redirect( route(RouteServiceProvider::STUDENT_HOME) )
+                return match (Auth::user()->role_id) {
+                    Role::ADMIN => redirect(route(RouteServiceProvider::ADMIN_HOME)),
+                    Role::TEACHER => redirect(route(RouteServiceProvider::TEACHER_HOME)),
+                    Role::STUDENT => redirect(route(RouteServiceProvider::STUDENT_HOME))
                 };
             }
         }

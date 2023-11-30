@@ -31,23 +31,30 @@ Route::group([
 ], function () {
     route::get('/', [AdminDashboardController::class, 'create'])->name('dashboard');
     route::get('ver-cursos', [CourseListingController::class, 'create'])->name('course.index');
-    // route::get('gestionar-curso/{course}', [CourseManagementController::class, 'create'])->name('course.edit');
-    // route::put('gestionar-curso', [CourseManagementController::class, 'update'])->name('course.update');
+    route::get('administrar-materias', [\App\Http\Controllers\Admin\SubjectManagementController::class, 'create'])->name('subject_management.create');
+    route::get('editar-materia/{subject}', [\App\Http\Controllers\Admin\SubjectController::class, 'edit'])->name('subject.edit');
+    route::patch('editar-materia/{subject}', [\App\Http\Controllers\Admin\SubjectController::class, 'update'])->name('subject.update');
+
+    route::get('nuevo-usuario', [\App\Http\Controllers\Admin\UserController::class, 'create'])->name('user.create');
+    route::post('nuevo-usuario', [\App\Http\Controllers\Admin\UserController::class, 'store'])->name('user.store');
+    route::get('editar-usuario/{user}', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('user.edit');
+    route::patch('editar-usuario/{user}', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('user.update');
+    route::delete('eliminar-usuario/{user}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('user.delete');
+
+    route::get('carga-de-datos', [\App\Http\Controllers\Admin\BulkUploadController::class, 'create'])->name('bulk_uploads.create');
 
     route::get('ver-materias', [SubjectListingController::class, 'create'])->name('subject.index');
     route::get('ver-materias/{course}', [CourseSubjectListingController::class, 'create'])->name('course.subject.index');
 
     route::get('ver-estudiantes', [StudentListingController::class, 'create'])->name('student.index');
     route::get('ver-estudiantes/{course}', [CourseStudentListingController::class, 'create'])->name('course.student.index');
-    route::get('gestionar-estudiante/{user}', [StudentManagementController::class, 'create'])->name('student.edit');
-
-    route::put('gestionar-calificables', [GradableAuthorizationController::class, 'update'])->name('gradable.update');
 
     // RUTAS TESTING
     route::post('subir-reporte', [\App\Http\Controllers\Storage\StudentGradesReportController::class, 'store'])->name('student_grades_report.store');
     route::post('guardar-ausencia', [\App\Http\Controllers\Admin\StudentAbsenceReportController::class, 'store'])->name('student_absence_report.store');
     route::patch('actualizar-ausencia', [\App\Http\Controllers\Admin\StudentAbsenceReportController::class, 'update'])->name('student_absence_report.update');
     route::post('importar-estudiantes', [\App\Http\Controllers\Admin\UsersImportController::class, 'excel']);
+    route::post('abrir-calificaciones', [\App\Http\Controllers\Admin\GradablePeriodStateController::class, 'store']);
     //FIN RUTAS TESTING
 });
 
@@ -57,10 +64,10 @@ Route::group([
     'prefix' => '/docente',
     'as' => 'teacher.',
 ], function () {
-   route::get('/', [TeacherDashboardController::class, 'create'])->name('dashboard');
+    route::get('/', [TeacherDashboardController::class, 'create'])->name('dashboard');
 });
 
-Route::middleware('auth')->group(function (){
+Route::middleware('auth')->group(function () {
     Route::get('/perfil', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/perfil', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/perfil', [ProfileController::class, 'destroy'])->name('profile.destroy');

@@ -12,7 +12,7 @@ class GradablePeriod extends Model
 
     protected $fillable = ['period'];
 
-    public function studentGrades() : HasMany
+    public function studentGrades(): HasMany
     {
         return $this->hasMany(StudentGrade::class, 'period', 'gradable_period');
     }

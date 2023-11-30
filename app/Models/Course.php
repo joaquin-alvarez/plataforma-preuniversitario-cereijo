@@ -11,17 +11,17 @@ class Course extends Model
 {
     use HasFactory;
 
-    public function announcements() : BelongsToMany
+    public function announcements(): BelongsToMany
     {
         return $this->belongsToMany(Announcement::class);
     }
 
-    public function students() : HasMany
+    public function students(): HasMany
     {
         return $this->hasMany(User::class);
     }
 
-    public function subjects() : HasMany
+    public function subjects(): HasMany
     {
         return $this->hasMany(Subject::class);
     }

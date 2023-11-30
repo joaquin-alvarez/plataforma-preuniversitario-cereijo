@@ -9,7 +9,7 @@ class CourseListingController extends Controller
 {
     public function create()
     {
-        return view('admin.course-listing',[
+        return view('admin.course-listing', [
             'courses' => Course::all(),
         ]);
     }

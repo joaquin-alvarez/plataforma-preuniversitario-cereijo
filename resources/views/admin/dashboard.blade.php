@@ -1,6 +1,7 @@
 <x-layouts.app>
-    <x-layouts.navbar/>
+    <x-layouts.navbar />
     <div class="container mx-auto">
+
         <div>
             <span class="font-bold">Test subida de alumnos en bulk</span>
             <form action="administrador/importar-estudiantes" method="POST" enctype="multipart/form-data">
@@ -13,13 +14,42 @@
 
         </div>
 
+        <div class="mt-16 flex flex-row gap-20">
+            <div class="flex flex-col">
+                <span class="font-bold">Test apertura/cierre de periodos de calificacion</span>
+                <form action="administrador/abrir-calificaciones" method="POST">
+                    @csrf
+
+                    <label for="period">Period:</label>
+                    <select id="period" name="period" required>
+                        @foreach ($periods as $period)
+                            <option value="{{ $period->id }}">{{ $period->period }}</option>
+                        @endforeach
+                    </select><br><br>
+                    <label for="from">From:</label>
+                    <input type="datetime-local" name="active_from" id="from" required>
+                    <br><br>
+                    <label for="until">Until:</label>
+                    <input type="datetime-local" name="active_until" id="until" required>
+                    <br><br>
+                    <button class="btn-sm btn-primary" type="submit">Abrir</button>
+                </form>
+            </div>
+            <div class="flex flex-col">
+                <span class="font-bold">Periodo abierto</span>
+
+                {{ $active_period ?? '' }}
+            </div>
+        </div>
+
         <div class="mt-16">
             <span class="font-bold">Testing subir boletines</span>
-            <form action="{{ route('admin.student_grades_report.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.student_grades_report.store') }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
                 <label for="student_dni">Student DNI:</label>
                 <select id="student_dni" name="student_dni">
-                    @foreach($students as $student)
+                    @foreach ($students as $student)
                         <option value="{{ $student->dni }}">{{ $student->dni }}</option>
                     @endforeach
                 </select><br><br>
@@ -27,7 +57,7 @@
                 <label for="file">Choose file:</label>
                 <input type="file" id="file" name="file"><br><br>
 
-                <button class="btn-sm btn-primary" type="submit" >Upload</button>
+                <button class="btn-sm btn-primary" type="submit">Upload</button>
 
                 @if ($errors->any())
                     <div class="alert">
@@ -48,7 +78,7 @@
                     @csrf
                     <label for="student_dni">Student DNI:</label>
                     <select id="student_dni" name="student_dni">
-                        @foreach($students as $student)
+                        @foreach ($students as $student)
                             <option value="{{ $student->dni }}">{{ $student->dni }}</option>
                         @endforeach
                     </select><br><br>
@@ -60,12 +90,13 @@
                     <input class="input input-bordered" type="text" id="comment" name="comment"><br><br>
 
                     <label for="is_justified">Esta justificada:</label>
-                    <input type="radio" id="no" name="is_justified" value="0" @checked(true)>
+                    <input type="radio" id="no" name="is_justified" value="0"
+                        @checked(true)>
                     <label for="no">No</label>
-                    <input type="radio" id="yes" name="is_justified" value="1" >
+                    <input type="radio" id="yes" name="is_justified" value="1">
                     <label for="yes">Si</label><br><br>
 
-                    <button class="btn-sm btn-primary" type="submit" >Save</button>
+                    <button class="btn-sm btn-primary" type="submit">Save</button>
 
                     @if ($errors->any())
                         <div class="alert">
@@ -82,14 +113,15 @@
             <div class="flex flex-col" x-data="{
                 students: {{ Js::from($students) }},
                 selected: [],
-                get reports() { try { parsed = JSON.parse(this.selected); } catch(e) { return false; } return parsed; },
-            }" >
+                get reports() { try { parsed = JSON.parse(this.selected); } catch (e) { return false; } return parsed; },
+            }">
                 <div>
                     <span class="font-bold">Testing ver/editar ausentismo</span><br>
                     <label>Student DNI:
-                        <select x-model="selected" x-on:change="console.log(reports)">
+                        <select x-model="selected" @@change="console.log(reports)">
                             <template x-for="student in students">
-                                <option x-bind:value="JSON.stringify(student.student_absence_reports)" x-text="student.dni" ></option>
+                                <option x-bind:value="JSON.stringify(student.student_absence_reports)"
+                                    x-text="student.dni"></option>
                             </template>
                         </select><br><br>
                     </label>
@@ -97,21 +129,21 @@
                 <div>
                     <table>
                         <thead>
-                        <tr>
-                            <th>comment</th>
-                            <th>date</th>
-                            <th>justified</th>
-                            <th>controls</th>
-                        </tr>
+                            <tr>
+                                <th>comment</th>
+                                <th>date</th>
+                                <th>justified</th>
+                                <th>controls</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <template x-for="report in reports">
-                            <tr>
-                                <td x-text="report.comment"></td>
-                                <td x-text="report.date_of_absence"></td>
-                                <td x-text="report.is_justified"></td>
-                            </tr>
-                        </template>
+                            <template x-for="report in reports">
+                                <tr>
+                                    <td x-text="report.comment"></td>
+                                    <td x-text="report.date_of_absence"></td>
+                                    <td x-text="report.is_justified"></td>
+                                </tr>
+                            </template>
                         </tbody>
                     </table>
                 </div>

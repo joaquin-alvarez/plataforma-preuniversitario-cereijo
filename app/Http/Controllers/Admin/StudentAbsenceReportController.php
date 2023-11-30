@@ -44,7 +44,7 @@ class StudentAbsenceReportController extends Controller
             'is_justified' => $request->is_justified,
         ]);
 
-        return redirect( route('admin.dashboard') );
+        return redirect(route('admin.dashboard'));
     }
 
     /**
@@ -52,7 +52,7 @@ class StudentAbsenceReportController extends Controller
      */
     public function show(StudentAbsenceReport $studentAbsenceReport)
     {
-        return redirect( route('admin.dashboard'), [
+        return redirect(route('admin.dashboard'), [
             'student_absence_report' => $studentAbsenceReport,
         ]);
     }
@@ -82,7 +82,7 @@ class StudentAbsenceReportController extends Controller
             'is_justified' => $request->is_justified,
         ]);
 
-        return redirect( route('admin.dashboard') );
+        return redirect(route('admin.dashboard'));
     }
 
     /**
@@ -92,6 +92,6 @@ class StudentAbsenceReportController extends Controller
     {
         StudentAbsenceReport::destroy($studentAbsenceReport);
 
-        return redirect( route('admin.dashboard') );
+        return redirect(route('admin.dashboard'));
     }
 }
