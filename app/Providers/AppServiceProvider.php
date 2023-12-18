@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\Support\Role;
+use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,5 +27,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('navigate-as-admin', fn (User $user) => $user->role_id === Role::ADMIN);
         Gate::define('navigate-as-teacher', fn (User $user) => $user->role_id === Role::TEACHER);
         Gate::define('navigate-as-student', fn (User $user) => $user->role_id === Role::STUDENT);
+
+		Blade::directive('isActiveRoute', fn (string $route) => "<?php echo Route::currentRouteNamed($route) ? 'active' : '' ?>");
     }
 }

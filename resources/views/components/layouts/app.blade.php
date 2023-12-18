@@ -9,6 +9,7 @@
 </head>
 <body class="antialiased">
     <x-success-alert/>
+
     {{ $slot }}
 
     @stack('scripts')

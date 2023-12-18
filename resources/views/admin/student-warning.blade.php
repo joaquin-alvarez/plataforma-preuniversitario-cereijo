@@ -1,3 +1,3 @@
 <x-layouts.admin-dashboard>
-    DASHBOARD CONTENT =)
+    Coso
 </x-layouts.admin-dashboard>

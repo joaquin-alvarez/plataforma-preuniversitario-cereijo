@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\GradableAuthorizationController;
 use App\Http\Controllers\Admin\StudentListingController;
 use App\Http\Controllers\Admin\StudentManagementController;
+use App\Http\Controllers\Admin\StudentWarningController;
 use App\Http\Controllers\Admin\SubjectListingController;
 use App\Http\Controllers\Teacher\DashboardController as TeacherDashboardController;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,8 @@ Route::group([
     'as' => 'admin.',
 ], function () {
     route::get('/', [AdminDashboardController::class, 'create'])->name('dashboard');
+	route::get('amonestaciones', [StudentWarningController::class, 'create'])->name('student_warnings.create');
+
     route::get('ver-cursos', [CourseListingController::class, 'create'])->name('course.index');
     route::get('administrar-materias', [\App\Http\Controllers\Admin\SubjectManagementController::class, 'create'])->name('subject_management.create');
     route::get('editar-materia/{subject}', [\App\Http\Controllers\Admin\SubjectController::class, 'edit'])->name('subject.edit');
