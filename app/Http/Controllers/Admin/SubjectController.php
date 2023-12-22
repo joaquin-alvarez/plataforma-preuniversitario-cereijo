@@ -49,7 +49,7 @@ class SubjectController extends Controller
     {
         $teachers = User::ofRole(Role::TEACHER)->get();
 
-        return view ('admin.subject-edit', [
+        return view('admin.subject-edit', [
             'subject' => $subject->load('teacher'),
             'teachers' => $teachers,
         ]);
@@ -65,13 +65,14 @@ class SubjectController extends Controller
         ]);
 
         if ($validatedData) {
-           $subject->teacher_dni = $validatedData['teacher_dni'];
-           $subject->save();
-           return redirect( route('admin.subject_management.create') )->with('success', 'Cambios guardados con éxito');
+            $subject->teacher_dni = $validatedData['teacher_dni'];
+            $subject->save();
+
+            return redirect(route('admin.subject_management.create'))->with('success', 'Cambios guardados con éxito');
         }
 
         return back()->withErrors([
-            'teacher' => "Docente inexistente",
+            'teacher' => 'Docente inexistente',
         ]);
     }
 

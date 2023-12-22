@@ -4,9 +4,7 @@ use App\Http\Controllers\Admin\CourseListingController;
 use App\Http\Controllers\Admin\CourseStudentListingController;
 use App\Http\Controllers\Admin\CourseSubjectListingController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
-use App\Http\Controllers\Admin\GradableAuthorizationController;
 use App\Http\Controllers\Admin\StudentListingController;
-use App\Http\Controllers\Admin\StudentManagementController;
 use App\Http\Controllers\Admin\StudentWarningController;
 use App\Http\Controllers\Admin\SubjectListingController;
 use App\Http\Controllers\Teacher\DashboardController as TeacherDashboardController;
@@ -31,7 +29,8 @@ Route::group([
     'as' => 'admin.',
 ], function () {
     route::get('/', [AdminDashboardController::class, 'create'])->name('dashboard');
-	route::get('amonestaciones', [StudentWarningController::class, 'create'])->name('student_warnings.create');
+    route::get('amonestaciones', [StudentWarningController::class, 'index'])->name('student_warnings.index');
+    route::post('amonestaciones', [StudentWarningController::class, 'search'])->name('student_warnings.search');
 
     route::get('ver-cursos', [CourseListingController::class, 'create'])->name('course.index');
     route::get('administrar-materias', [\App\Http\Controllers\Admin\SubjectManagementController::class, 'create'])->name('subject_management.create');

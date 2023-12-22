@@ -32,7 +32,7 @@ class GradablePeriodStateController extends Controller
         $request->validate([
             'period' => 'required|numeric',
             'active_from' => 'required|date',
-            'active_until' => 'required|date'
+            'active_until' => 'required|date',
         ]);
 
         $gradablePeriodState = new GradablePeriodState([
@@ -40,7 +40,7 @@ class GradablePeriodStateController extends Controller
             'active_from' => $request->active_from,
             'active_until' => $request->active_until,
         ]);
-        
+
         $gradablePeriodState->save();
 
         return redirect(route('admin.dashboard'));

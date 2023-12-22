@@ -12,8 +12,9 @@ class SubjectManagementController extends Controller
     public function create(): View
     {
         $subjects = Subject::all()->load(['course', 'teacher']);
+
         return view('admin.subject-management',
-        ['subjects' => $subjects]);
+            ['subjects' => $subjects]);
     }
 
     /**

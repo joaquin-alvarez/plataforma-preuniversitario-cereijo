@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\StudentWarning;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class StudentWarningController extends Controller
@@ -12,15 +13,24 @@ class StudentWarningController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
-        //
+        return view('admin.student-warning');
+    }
+
+    public function search(Request $request): Response
+    {
+        return view('admin.student-warning')
+            ->fragmentsIf(
+                $request->hasHeader('HX-Request'),
+                ['student-list']
+            );
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create() : View
+    public function create(): View
     {
         return view('admin.student-warning');
     }

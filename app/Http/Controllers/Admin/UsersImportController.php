@@ -22,14 +22,14 @@ class UsersImportController extends Controller
 
                 User::firstOrCreate(
                     [
-                        'dni' => $rowProperties['dni']
+                        'dni' => $rowProperties['dni'],
                     ],
                     [
-                        'course_id' => $courseID, 
-                        'role_id' => Role::STUDENT, 
-                        'first_name' => $rowProperties['nombre'], 
-                        'last_name' => $rowProperties['apellido'], 
-                        'password' => $rowProperties['password']
+                        'course_id' => $courseID,
+                        'role_id' => Role::STUDENT,
+                        'first_name' => $rowProperties['nombre'],
+                        'last_name' => $rowProperties['apellido'],
+                        'password' => $rowProperties['password'],
                     ]
                 );
             });

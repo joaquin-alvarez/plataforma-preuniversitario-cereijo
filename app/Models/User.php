@@ -3,7 +3,6 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Support\Role;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -44,10 +43,10 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    protected function properFullName() : Attribute
+    protected function properFullName(): Attribute
     {
         return Attribute::make(
-            get: fn() => Str::title($this->last_name.', '.$this->first_name)
+            get: fn () => Str::title($this->last_name.', '.$this->first_name)
         );
     }
 

@@ -72,9 +72,8 @@ return new class extends Migration
             $table->foreign('announcement_id')->references('id')->on('announcements')->onDelete('cascade');
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
         });
-        
-        Schema::table('student_warnings', fn(Blueprint $table) => 
-            $table->foreign('student_dni')->references('dni')->on('users')->onDelete('cascade')
+
+        Schema::table('student_warnings', fn (Blueprint $table) => $table->foreign('student_dni')->references('dni')->on('users')->onDelete('cascade')
         );
     }
 

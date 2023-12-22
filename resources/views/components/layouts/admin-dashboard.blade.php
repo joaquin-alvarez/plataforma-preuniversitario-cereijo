@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-            <div class="p-2 sm:p-4 w-full">
+            <div class="p-4 sm:p-8 w-full">
                 {{ $slot }}
             </div>
 
@@ -31,7 +31,7 @@
         </div>
         <div class="drawer-side">
             <label for="the-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-            <aside class="bg-base-100 min-h-screen w-80">
+            <aside class="bg-gray-50 min-h-screen w-80">
                 <div class="bg-base-100 sticky top-0 z-20 hidden items-center gap-2 bg-opacity-90 px-4 py-2 backdrop-blur lg:flex shadow-sm">
                     <a href="#" class="flex-0 btn btn-ghost px-2">
                         <img alt="Logo Colegio Cereijo" width="40" height="40" src="{{ Storage::url('assets/logo.png') }}">
@@ -39,11 +39,11 @@
                     </a>
                 </div>
                 <div class="h-4"></div>
-                <ul class="menu bg-base-100 gap-4 w-80 rounded-box">
+                <ul class="menu bg-base-100 gap-4 pr-4 w-80 rounded-box">
                     <li>
                         <h2 class="prose text-slate-900 menu-title">Administrar Alumnos</h2>
                         <ul>
-                            <li><a class="@isActiveRoute('admin.student_warnings.create') }}" href="{{ route('admin.student_warnings.create') }}">Amonestaciones</a></li>
+                            <li><a class="@isActiveRoute('admin.student_warnings.index') }}" href="{{ route('admin.student_warnings.index') }}">Amonestaciones</a></li>
                          {{--   <li><a href="{{ route('admin.student_withdrawals.create') }}">Faltas / Retiros anticipados</a></li>
                             <li><a href="{{ route('admin.student_guardians.create') }}">Autorizados a retirar</a></li>
                         </ul>
