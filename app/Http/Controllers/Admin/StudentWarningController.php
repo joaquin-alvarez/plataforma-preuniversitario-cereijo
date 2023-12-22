@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\StudentWarning;
+use App\Models\Support\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
@@ -18,13 +20,15 @@ class StudentWarningController extends Controller
         return view('admin.student-warning');
     }
 
-    public function search(Request $request): Response
+    public function search(Request $request)
     {
-        return view('admin.student-warning')
-            ->fragmentsIf(
-                $request->hasHeader('HX-Request'),
-                ['student-list']
-            );
+        $students = User::ofRole(Role::STUDENT)
+            ->where('dni', 'like', '%'.$request->search.'%')->get();
+
+        return view('admin.student-warning', [
+            'students'=> $students,
+        ])
+        ->fragmentsIf($request->hasHeader('HX-Request'), ['result-list']);
     }
 
     /**
