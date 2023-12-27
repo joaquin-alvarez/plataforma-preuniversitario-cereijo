@@ -9,11 +9,11 @@ Este repositorio público tiene un sistema de auth simplificado para resguardar 
 
 
 ## Stack
-Laravel 10
 
+Laravel 10
 PHP 8.1
 
 ## Libraries
-HTMX para asincronismo en el cliente
 
+HTMX para asincronismo en el cliente
 TailwindCSS
