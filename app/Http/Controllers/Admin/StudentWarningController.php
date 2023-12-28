@@ -4,14 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\StudentWarning;
-use App\Models\Support\Role;
 use App\Models\User;
+use App\Services\SearchService;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class StudentWarningController extends Controller
 {
+    protected $searchService;
+
+    public function __construct(SearchService $searchService)
+    {
+        $this->searchService = $searchService; 
+    }
     /**
      * Display a listing of the resource.
      */
@@ -22,11 +27,11 @@ class StudentWarningController extends Controller
 
     public function search(Request $request)
     {
-        $students = User::ofRole(Role::STUDENT)
-            ->where('dni', 'like', '%'.$request->search.'%')->get();
+        $results = $this->searchService
+            ->searchStudentsWithCountedWarnings($request->search);
 
         return view('admin.student-warning', [
-            'students'=> $students,
+            'students'=> $results,
         ])
         ->fragmentsIf($request->hasHeader('HX-Request'), ['result-list']);
     }
@@ -47,12 +52,11 @@ class StudentWarningController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(StudentWarning $studentWarning)
+    public function show(User $user)
     {
-        //
+        return view('admin.student-warnings', [
+            'student' => $user->load('studentWarnings')
+        ]);
     }
 
     /**

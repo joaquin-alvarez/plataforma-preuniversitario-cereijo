@@ -31,6 +31,9 @@ Route::group([
     route::get('/', [AdminDashboardController::class, 'create'])->name('dashboard');
     route::get('amonestaciones', [StudentWarningController::class, 'index'])->name('student_warnings.index');
     route::post('amonestaciones', [StudentWarningController::class, 'search'])->name('student_warnings.search');
+    route::get('amonestaciones/{user}', [StudentWarningController::class, 'show'])->name('student_warnings.show');
+    route::get('amonestaciones/crear', [StudentWarningController::class, 'create'])->name('student_warnings.create');
+    route::post('amonestaciones/crear', [StudentWarningController::class, 'store'])->name('student_warnings.store');
 
     route::get('ver-cursos', [CourseListingController::class, 'create'])->name('course.index');
     route::get('administrar-materias', [\App\Http\Controllers\Admin\SubjectManagementController::class, 'create'])->name('subject_management.create');

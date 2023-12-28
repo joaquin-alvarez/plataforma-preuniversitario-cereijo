@@ -35,26 +35,22 @@
                 @foreach ($students as $student)
                 <tr>
                   <td>
-                    <div class="flex items-center gap-3">
-                      <div class="avatar">
-                        <div class="mask mask-squircle w-12 h-12">
-                          
-                        </div>
-                      </div>
-                      <div>
-                        <div class="font-bold">{{ $student->dni }}</div>
-                        <div class="text-sm opacity-100">{{ $student }}</div>
-                      </div>
-                    </div>
+                    {{ $student->dni }} 
+                    ({{ $student->proper_full_name }})
                   </td>
                   <td>
-                    Zemlak, Daniel and Leannon
-                    <br/>
-                    <span class="badge badge-ghost badge-sm">Desktop Support Technician</span>
+                    {{ $student->studentCourse->course }}
                   </td>
-                  <td>Purple</td>
+                  <td>
+                    {{ $student->student_warnings_count }}
+                  </td>
                   <th>
-                    <button class="btn btn-ghost btn-xs">details</button>
+                    <a href="{{ route('admin.student_warnings.show', [$student]) }}">
+                      <button class="btn btn-ghost btn-xs">ver amonestaciones</button>
+                    </a>
+                    <a href="{{ route('admin.student_warnings.create') }}">
+                      <button class="btn btn-ghost btn-xs">amonestar</button>
+                    </a>
                   </th>
                 </tr>
                 @endforeach

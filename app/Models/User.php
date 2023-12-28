@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -23,14 +24,26 @@ class User extends Authenticatable
 
     protected $appends = ['proper_full_name'];
 
+    public function studentAbsenceReports(): HasMany
+    {
+        return $this->hasMany(StudentAbsenceReport::class, 'student_dni');
+    }
+
+    public function studentCourse(): BelongsTo
+    {
+        return $this->belongsTo(Course::class, 'course_id', 'id')->withDefault([
+            'course' => 'sin curso asignado'
+        ]);
+    }
+
     public function studentGuardians(): BelongsToMany
     {
         return $this->belongsToMany(StudentGuardian::class);
     }
 
-    public function studentAbsenceReports(): HasMany
+    public function studentWarnings(): HasMany
     {
-        return $this->hasMany(StudentAbsenceReport::class, 'student_dni');
+        return $this->hasMany(StudentWarning::class, 'student_dni', 'dni');
     }
 
     protected $guarded = [];
@@ -53,5 +66,10 @@ class User extends Authenticatable
     public function scopeOfRole(Builder $query, int $role_id): void
     {
         $query->where('role_id', $role_id);
+    }
+
+    public function scopeSearch(Builder $query, int $dni)
+    {
+        $query->where('dni', 'like', '%'.$dni.'%');
     }
 }
