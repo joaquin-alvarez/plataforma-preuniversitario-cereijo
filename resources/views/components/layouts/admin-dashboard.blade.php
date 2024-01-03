@@ -21,13 +21,13 @@
                     </ul>
                 </div>
             </div>
-
+            
             <div class="p-4 sm:p-8 w-full">
                 {{ $slot }}
             </div>
-
+            
             <label for="the-drawer" class="btn btn-primary drawer-button lg:hidden">Open drawer</label>
-
+            
         </div>
         <div class="drawer-side">
             <label for="the-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
@@ -43,45 +43,59 @@
                     <li>
                         <h2 class="prose text-slate-900 menu-title">Administrar Alumnos</h2>
                         <ul>
-                            <li><a class="@isActiveRoute('admin.student_warnings.index') }}" href="{{ route('admin.student_warnings.index') }}">Amonestaciones</a></li>
-                         {{--   <li><a href="{{ route('admin.student_withdrawals.create') }}">Faltas / Retiros anticipados</a></li>
-                            <li><a href="{{ route('admin.student_guardians.create') }}">Autorizados a retirar</a></li>
+                            <li>
+                                <a class="@isActiveRoute('admin.student_warnings.index') }}"
+                                href="{{ route('admin.student_warnings.index') }}">Amonestaciones</a>
+                            </li>
+                            <li>
+                                <a class="@isActiveRoute('admin.student_absence_reports.index') }}"
+                                href="{{ route('admin.student_absence_reports.index') }}">Faltas / Retiros anticipados</a>
+                            </li>
+                            <li>
+                                <a class=""
+                                href="">Autorizados a retirar</a>
+                            </li>
+                            <li>
+                                <a class="" 
+                                href="">Buscador de alumnos</a>
+                            </li>
                         </ul>
                     </li>
                     <li>
                         <h2 class="prose text-slate-900 menu-title">Administrar Calificaciones</h2>
-                        <ul>
-                            <li><a href="{{ route('admin.gradable_periods.create') }}">Apertura y cierre de Periodos de Calificaciones</a></li>
-                            <li><a href="{{ route('admin.grades_reports.create') }}">Boletines de calificaciones</a></li>
-                            <li><a href="{{ route('admin.student_grades.create') }}">Ver calificaciones</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <h2 class="prose text-slate-900 menu-title">Administrar Cursos</h2>
-                        <ul>
-                            <li><a href="{{ route('admin.course_teachers.create') }}">Cambiar Docente</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <h2 class="prose text-slate-900 menu-title">Calendario</h2>
-                        <ul>
-                            <li><a href="">Administrar eventos</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <h2 class="prose text-slate-900 menu-title">Cuentas de usuario</h2>
-                        <ul>
-                            <li><a href="{{ route('admin.users_management.create') }}">Administrar cuentas</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <h2 class="prose text-slate-900 menu-title">Carga de datos</h2>
-                        <ul>
-                            <li><a href="{{ route('admin.bulk_uploads.create') }}">Cargar Alumnos y Docentes</a></li>--}}
-                        </ul>
-                    </li>
-                </ul>
-            </aside>
+                            <ul>
+                                <li><a href="">Apertura y cierre de Periodos de Calificaciones</a></li>
+                                <li><a href="">Boletines de calificaciones</a></li>
+                                <li><a href="">Buscador de calificaciones</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h2 class="prose text-slate-900 menu-title">Administrar Cursos</h2>
+                            <ul>
+                                <li><a href="">Cambiar Docente</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h2 class="prose text-slate-900 menu-title">Calendario</h2>
+                            <ul>
+                                <li><a href="">Administrar eventos</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h2 class="prose text-slate-900 menu-title">Cuentas de usuario</h2>
+                            <ul>
+                                <li><a href="">Administrar cuentas</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <h2 class="prose text-slate-900 menu-title">Carga de datos</h2>
+                            <ul>
+                                <li><a href="">Cargar Alumnos y Docentes</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </aside>
+            </div>
         </div>
-    </div>
-</x-layouts.app>
+    </x-layouts.app>
+    

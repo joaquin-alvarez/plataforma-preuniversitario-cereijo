@@ -4,10 +4,12 @@ use App\Http\Controllers\Admin\CourseListingController;
 use App\Http\Controllers\Admin\CourseStudentListingController;
 use App\Http\Controllers\Admin\CourseSubjectListingController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\StudentAbsenceReportController;
 use App\Http\Controllers\Admin\StudentListingController;
 use App\Http\Controllers\Admin\StudentWarningController;
 use App\Http\Controllers\Admin\SubjectListingController;
 use App\Http\Controllers\Teacher\DashboardController as TeacherDashboardController;
+use App\Models\StudentAbsenceReport;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,8 +34,14 @@ Route::group([
     route::get('amonestaciones', [StudentWarningController::class, 'index'])->name('student_warnings.index');
     route::post('amonestaciones', [StudentWarningController::class, 'search'])->name('student_warnings.search');
     route::get('amonestaciones/{user}', [StudentWarningController::class, 'show'])->name('student_warnings.show');
-    route::get('amonestaciones/crear', [StudentWarningController::class, 'create'])->name('student_warnings.create');
+    route::get('amonestaciones/crear/{user}', [StudentWarningController::class, 'create'])->name('student_warnings.create');
     route::post('amonestaciones/crear', [StudentWarningController::class, 'store'])->name('student_warnings.store');
+
+    route::get('ausencias', [StudentAbsenceReportController::class, 'index'])->name('student_absence_reports.index');
+    route::post('ausencias', [StudentAbsenceReportController::class, 'search'])->name('student_absence_reports.search');
+    route::get('ausencias/{user}', [StudentAbsenceReportController::class, 'show'])->name('student_absence_reports.show');
+    route::get('ausencias/crear/{user}', [StudentAbsenceReportController::class, 'create'])->name('student_absence_reports.create');
+    route::post('ausencias/crear', [StudentAbsenceReportController::class, 'store'])->name('student_absence_reports.store');
 
     route::get('ver-cursos', [CourseListingController::class, 'create'])->name('course.index');
     route::get('administrar-materias', [\App\Http\Controllers\Admin\SubjectManagementController::class, 'create'])->name('subject_management.create');

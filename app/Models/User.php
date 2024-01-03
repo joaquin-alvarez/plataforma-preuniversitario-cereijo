@@ -46,6 +46,11 @@ class User extends Authenticatable
         return $this->hasMany(StudentWarning::class, 'student_dni', 'dni');
     }
 
+    public function studentWithdrawals(): HasMany
+    {
+        return $this->hasMany(StudentWithdrawal::class, 'student_dni', 'dni');
+    }
+
     protected $guarded = [];
 
     protected $hidden = [

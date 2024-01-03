@@ -37,4 +37,16 @@ class SearchService
             ->withCount('studentWarnings')
             ->get();
     }
+
+    public function searchStudentsWithAbsencesAndWithdrawals(int $dni)
+    {
+        return $this
+            ->baseUserSearchQuery()
+            ->ofRole(Role::STUDENT)
+            ->search($dni)
+            ->with('studentCourse')
+            ->withCount('studentAbsenceReports')
+            ->withCount('studentWithdrawals')
+            ->get();
+    }
 }

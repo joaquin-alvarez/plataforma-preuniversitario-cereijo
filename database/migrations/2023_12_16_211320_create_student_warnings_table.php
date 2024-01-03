@@ -12,10 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('student_warnings', function (Blueprint $table) {
-            $table->id();
+            $table->id();re
             $table->unsignedBigInteger('student_dni');
             $table->date('date_of');
             $table->text('observations')->nullable();
+            $table->text('reason');
             $table->timestamps();
         });
     }

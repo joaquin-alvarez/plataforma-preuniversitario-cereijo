@@ -45,10 +45,10 @@
                     {{ $student->student_warnings_count }}
                   </td>
                   <th>
-                    <a href="{{ route('admin.student_warnings.show', [$student]) }}">
+                    <a href="{{ route('admin.student_warnings.show', ['user' => $student]) }}">
                       <button class="btn btn-ghost btn-xs">ver amonestaciones</button>
                     </a>
-                    <a href="{{ route('admin.student_warnings.create') }}">
+                    <a href="{{ route('admin.student_warnings.create', ['user' => $student]) }}">
                       <button class="btn btn-ghost btn-xs">amonestar</button>
                     </a>
                   </th>

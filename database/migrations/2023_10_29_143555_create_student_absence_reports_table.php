@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('student_dni');
             $table->date('date_of_absence');
-            $table->text('comment')->nullable();
+            $table->text('comments')->nullable();
             $table->boolean('is_justified')->default(false);
             $table->timestamps();
         });

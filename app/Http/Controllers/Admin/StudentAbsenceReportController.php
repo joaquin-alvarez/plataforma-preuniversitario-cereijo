@@ -4,17 +4,36 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\StudentAbsenceReport;
+use App\Services\SearchService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class StudentAbsenceReportController extends Controller
 {
+    protected $searchService;
+
+    public function __construct(SearchService $searchService)
+    {
+        $this->searchService = $searchService;    
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return StudentAbsenceReport::all();
+        return view('admin.student-absence-reports');
+    }
+
+    public function search(Request $request) : Response
+    {
+        $results = $this->searchService
+        ->searchStudentsWithCountedWarnings($request->search);
+
+        return response(view('admin.student-warning', [
+            'students'=> $results,
+        ])
+        ->fragment('result-list'));    
     }
 
     /**
@@ -44,7 +63,7 @@ class StudentAbsenceReportController extends Controller
             'is_justified' => $request->is_justified,
         ]);
 
-        return redirect(route('admin.dashboard'));
+        return to_route('admin.dashboard');
     }
 
     /**
