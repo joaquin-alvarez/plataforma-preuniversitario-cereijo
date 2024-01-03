@@ -44,7 +44,7 @@
                         <h2 class="prose text-slate-900 menu-title">Administrar Alumnos</h2>
                         <ul>
                             <li>
-                                <a class="@isActiveRoute('admin.student_warnings.index') }}"
+                                <a class="@isActiveRoute(['admin.student_warnings.index', 'admin.student_warnings.create', 'admin.student_warnings.show']) }}"
                                 href="{{ route('admin.student_warnings.index') }}">Amonestaciones</a>
                             </li>
                             <li>

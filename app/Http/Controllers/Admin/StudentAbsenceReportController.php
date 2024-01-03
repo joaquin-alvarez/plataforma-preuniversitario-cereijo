@@ -30,7 +30,7 @@ class StudentAbsenceReportController extends Controller
         $results = $this->searchService
         ->searchStudentsWithCountedWarnings($request->search);
 
-        return response(view('admin.student-warning', [
+        return response(view('admin.student-warning-search', [
             'students'=> $results,
         ])
         ->fragment('result-list'));    

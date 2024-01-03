@@ -24,7 +24,7 @@ class StudentWarningController extends Controller
      */
     public function index(): View
     {
-        return view('admin.student-warning');
+        return view('admin.student-warning-search');
     }
 
     public function search(Request $request) : Response
@@ -32,7 +32,7 @@ class StudentWarningController extends Controller
         $results = $this->searchService
             ->searchStudentsWithCountedWarnings($request->search);
 
-        return response(view('admin.student-warning', [
+        return response(view('admin.student-warning-search', [
             'students'=> $results,
         ])
         ->fragmentsIf($request->hasHeader('HX-Request'), ['result-list']));
@@ -64,7 +64,7 @@ class StudentWarningController extends Controller
 
     public function show(User $user)
     {
-        return view('admin.student-warnings', [
+        return view('admin.student-warning-detail', [
             'student' => $user->load('studentWarnings')
         ]);
     }
