@@ -8,7 +8,7 @@
     <title>{{ $title ?? 'Comunicados Cereijo' }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="antialiased" hx-boost="true">
+<body class="antialiased">
     <x-success-alert/>
 
     {{ $slot }}

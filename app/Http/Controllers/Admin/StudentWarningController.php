@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\StudentWarning;
-use App\Models\User;
 use App\Services\SearchService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -22,9 +21,9 @@ class StudentWarningController extends Controller
 
     public function index (Request $request) : Response
     {
-        $results = [];
+        $results = collect([]);
 
-        if ($request->hasHeader('search')) {
+        if ($request->query('search')) {
             $results = $this->searchService
                 ->searchStudentsWarnings($request->query('search'));
         }
@@ -38,7 +37,7 @@ class StudentWarningController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function create() : View
     {
         return view('admin.student-warning-create');
     }
@@ -54,14 +53,12 @@ class StudentWarningController extends Controller
             'reason' => ['string', 'required', 'max:600'],
         ]);
 
-        return to_route('admin.student_warnings.index');
+        return to_route('admin.student_warnings');
     }
 
-    public function show(User $user)
+    public function show(StudentWarning $warning)
     {
-        return view('admin.student-warning-detail', [
-            'student' => $user->load('studentWarnings')
-        ]);
+
     }
 
     /**

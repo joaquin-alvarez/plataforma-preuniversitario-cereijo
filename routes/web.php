@@ -32,12 +32,15 @@ Route::group([
     'as' => 'admin.',
 ], function () {
     route::get('/', [AdminDashboardController::class, 'create'])->name('dashboard');
+    
+    route::get('/buscar-estudiante', [AdminDashboardController::class, 'create'])->name('student_search');
 
     route::get('amonestaciones', [StudentWarningController::class, 'index'])->name('student_warnings');
-    route::get('amonestaciones/{studentWarning}', [StudentWarningController::class, 'show'])->name('student_warnings.show');
     route::get('amonestaciones/crear', [StudentWarningController::class, 'create'])->name('student_warnings.create');
-    route::get('amonestaciones/{studentWarning}', [StudentWarning::class, 'edit'])->name('student_warnings.edit');
-    route::patch('amonestaciones/{studentWarning}', [StudentWarning::class, 'update'])->name('student_warnings.update');
+    route::get('amonestaciones/{warning}', [StudentWarningController::class, 'show'])->name('student_warnings.show');
+    route::get('amonestaciones/{warning}/editar', [StudentWarningController::class, 'edit'])->name('student_warnings.edit');
+    route::patch('amonestaciones/{warning}', [StudentWarningController::class, 'update'])->name('student_warnings.update');
+    route::delete('amonestaciones/{warning}', [StudentWarningController::class, 'destroy'])->name('student_warnings.destroy');
     route::post('amonestaciones', [StudentWarningController::class, 'store'])->name('student_warnings.store');
 
     route::get('ausencias', [StudentAbsenceReportController::class, 'index'])->name('student_absence_reports.index');

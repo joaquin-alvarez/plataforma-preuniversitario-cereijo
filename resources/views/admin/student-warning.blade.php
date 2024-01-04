@@ -11,25 +11,24 @@
       
       <div class="mt-4">
         <h2 class="font-bold mb-4">Buscador de amonestaciones</h2>
-        <x-active-search route="admin.student_warnings.search" placeholder="DNI del alumno"/>
+        <x-active-search route="admin.student_warnings" placeholder="DNI del alumno"/>
       </div>
       
       <div class="overflow-x-auto">
         <table id="response" class="table">
           <!-- head -->
-          @isset($warnings)
           @fragment('result-list')
-          @if($warnings->count() > 0)
-          <thead>
-            <tr>
-              <th>Alumno</th>
-              <th>Curso</th>
-              <th>Fecha</th>
-              <th>Razón</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
+            @if($warnings->isNotEmpty())
+            <thead>
+              <tr>
+                <th>Alumno</th>
+                <th>Curso</th>
+                <th>Fecha</th>
+                <th>Razón</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
               @foreach ($warnings as $warning)
               <tr>
                 <td>
@@ -46,20 +45,20 @@
                   {{ $warning->reason }}
                 </td>
                 <td>
-                  <a href="{{ route('admin.student_warnings.show', ['studentWarning' => $warning]) }}">
-                    <button class="btn btn-ghost btn-xs">detalle</button>
+                  <a href="{{ route('admin.student_warnings.show', ['warning' => $warning]) }}">
+                    <button class="btn btn-ghost btn-xs">ver</button>
                   </a>
-                  <a href="{{ route('admin.student_warnings.create') }}">
-                    <button class="btn btn-ghost btn-xs">amonestar</button>
+                  <a href="{{ route('admin.student_warnings.edit', ['warning' => $warning]) }}">
+                    <button class="btn btn-ghost btn-xs">editar</button>
+                  </a>
+                  <a href="{{ route('admin.student_warnings.destroy', ['warning' => $warning]) }}">
+                    <button class="btn btn-ghost btn-xs">borrar</button>
                   </a>
                 </td>
               </tr>
               @endforeach
-            @else
-            "Cero resultados"
-            @endif
+              @endif
             @endfragment
-            @endisset
           </tbody>
         </table>
       </div>

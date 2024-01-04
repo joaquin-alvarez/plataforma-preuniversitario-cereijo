@@ -3,11 +3,8 @@
         <!-- Page Header -->
         <h1 class="text-2xl font-bold">Crear Amonestación</h1>
         
-        <!-- Student Info -->
-        <div class="mt-4">
-            <p><strong>Alumno:</strong> {{ $student->proper_full_name }}</p>
-            <p><strong>DNI:</strong> {{ $student->dni }}</p>
-        </div>
+        <!-- Student Search -->
+
         
         <!-- Form -->
         <form method="POST" action="{{ route('admin.student_warnings.store') }}" class="mt-4">
@@ -23,6 +20,18 @@
                 @error('date_of')
                 <div class="alert">{{ $message }}</div>
                 @enderror
+            </div>
+
+            <div class="form-control w-full max-w-sm mt-4">
+                <label class="w-full">
+                    <svg class="pointer-events-none absolute z-10 my-3.5 ms-4 stroke-current opacity-60 text-base-content" width="18" height="18" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <input type="search" name="search" placeholder="DNI del alumno" class="pl-12 block input input-bordered w-full max-w-xs" 
+                    value="{{ request('search') }}"  
+                    hx-get="{{ route( 'admin.student_search' ) }}"
+                    hx-target="#response"
+                    hx-trigger="input changed delay:500ms, search"
+                    />
+                  </label>
             </div>
             
             <!-- Razón Field -->
@@ -44,7 +53,7 @@
                 </label>
                 <textarea name="observations" id="observations" rows="4" class="@error('observations') input-error @enderror textarea textarea-bordered h-24"></textarea>
                 @error('observations')
-                <div class="alert">{{ $message }}</div>
+                    <div class="alert">{{ $message }}</div>
                 @enderror
             </div>
             
