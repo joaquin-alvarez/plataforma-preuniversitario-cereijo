@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\StudentWarningController;
 use App\Http\Controllers\Admin\SubjectListingController;
 use App\Http\Controllers\Teacher\DashboardController as TeacherDashboardController;
 use App\Models\StudentAbsenceReport;
+use App\Models\StudentWarning;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,11 +32,13 @@ Route::group([
     'as' => 'admin.',
 ], function () {
     route::get('/', [AdminDashboardController::class, 'create'])->name('dashboard');
-    route::get('amonestaciones', [StudentWarningController::class, 'index'])->name('student_warnings.index');
-    route::post('amonestaciones', [StudentWarningController::class, 'search'])->name('student_warnings.search');
-    route::get('amonestaciones/{user}', [StudentWarningController::class, 'show'])->name('student_warnings.show');
-    route::get('amonestaciones/crear/{user}', [StudentWarningController::class, 'create'])->name('student_warnings.create');
-    route::post('amonestaciones/crear', [StudentWarningController::class, 'store'])->name('student_warnings.store');
+
+    route::get('amonestaciones', [StudentWarningController::class, 'index'])->name('student_warnings');
+    route::get('amonestaciones/{studentWarning}', [StudentWarningController::class, 'show'])->name('student_warnings.show');
+    route::get('amonestaciones/crear', [StudentWarningController::class, 'create'])->name('student_warnings.create');
+    route::get('amonestaciones/{studentWarning}', [StudentWarning::class, 'edit'])->name('student_warnings.edit');
+    route::patch('amonestaciones/{studentWarning}', [StudentWarning::class, 'update'])->name('student_warnings.update');
+    route::post('amonestaciones', [StudentWarningController::class, 'store'])->name('student_warnings.store');
 
     route::get('ausencias', [StudentAbsenceReportController::class, 'index'])->name('student_absence_reports.index');
     route::post('ausencias', [StudentAbsenceReportController::class, 'search'])->name('student_absence_reports.search');

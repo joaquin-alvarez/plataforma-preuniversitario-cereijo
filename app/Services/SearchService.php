@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Support\Role;
+use App\Models\StudentWarning;
 use App\Models\User;
 
 class SearchService
@@ -26,6 +27,14 @@ class SearchService
 
     //     return $query->get();
     // }
+
+    public function searchStudentsWarnings(int $dni)
+    {
+        return StudentWarning::query()
+            ->search($dni)
+            ->with('student.studentCourse')
+            ->get();
+    }
 
     public function searchStudentsWithCountedWarnings(int $dni)
     {

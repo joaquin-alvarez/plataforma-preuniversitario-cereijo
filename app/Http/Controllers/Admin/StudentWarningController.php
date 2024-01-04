@@ -19,33 +19,28 @@ class StudentWarningController extends Controller
     {
         $this->searchService = $searchService; 
     }
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(): View
-    {
-        return view('admin.student-warning-search');
-    }
 
-    public function search(Request $request) : Response
+    public function index (Request $request) : Response
     {
-        $results = $this->searchService
-            ->searchStudentsWithCountedWarnings($request->search);
+        $results = [];
 
-        return response(view('admin.student-warning-search', [
-            'students'=> $results,
+        if ($request->hasHeader('search')) {
+            $results = $this->searchService
+                ->searchStudentsWarnings($request->query('search'));
+        }
+
+        return response(view('admin.student-warning', [
+            'warnings'=> $results,
         ])
-        ->fragmentsIf($request->hasHeader('HX-Request'), ['result-list']));
+        ->fragmentIf($request->hasHeader('HX-Request'), 'result-list'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(User $user): View
+    public function create(): View
     {
-        return view('admin.student-warning-create', [
-            'student' => $user
-        ]);
+        return view('admin.student-warning-create');
     }
 
     /**
@@ -58,7 +53,7 @@ class StudentWarningController extends Controller
             'date_of' => ['required', 'before_or_equal:"now"'],
             'reason' => ['string', 'required', 'max:600'],
         ]);
-        dd($validated);
+
         return to_route('admin.student_warnings.index');
     }
 

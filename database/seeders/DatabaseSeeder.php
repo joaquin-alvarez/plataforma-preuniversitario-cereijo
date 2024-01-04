@@ -9,6 +9,7 @@ use App\Models\Course;
 use App\Models\GradablePeriod;
 use App\Models\Post;
 use App\Models\StudentGuardian;
+use App\Models\StudentWarning;
 use App\Models\StudentWithdrawal;
 use App\Models\Subject;
 use App\Models\Support\Role;
@@ -133,5 +134,12 @@ class DatabaseSeeder extends Seeder
                 'user_dni' => $subject->teacher->dni,
             ]);
         }
+
+        foreach (User::ofRole(Role::STUDENT)->get()->random(400) as $student) {
+            StudentWarning::factory()
+            ->count(3)
+            ->for($student, 'student')
+            ->create();
+        };
     }
 }
