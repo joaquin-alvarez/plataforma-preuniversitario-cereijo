@@ -28,6 +28,15 @@ class SearchService
     //     return $query->get();
     // }
 
+    public function findStudent(int $dni)
+    {
+        return $this
+            ->baseUserSearchQuery()
+            ->ofRole(Role::STUDENT)
+            ->search($dni)
+            ->get();
+    }
+
     public function searchStudentsWarnings(int $dni)
     {
         return StudentWarning::query()

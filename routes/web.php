@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\StudentAbsenceReportController;
 use App\Http\Controllers\Admin\StudentListingController;
 use App\Http\Controllers\Admin\StudentWarningController;
 use App\Http\Controllers\Admin\SubjectListingController;
+use App\Http\Controllers\Admin\UserSearchController;
 use App\Http\Controllers\Teacher\DashboardController as TeacherDashboardController;
 use App\Models\StudentAbsenceReport;
 use App\Models\StudentWarning;
@@ -33,7 +34,7 @@ Route::group([
 ], function () {
     route::get('/', [AdminDashboardController::class, 'create'])->name('dashboard');
     
-    route::get('/buscar-estudiante', [AdminDashboardController::class, 'create'])->name('student_search');
+    route::post('/buscar-estudiante', [UserSearchController::class, 'findStudent'])->name('student_search');
 
     route::get('amonestaciones', [StudentWarningController::class, 'index'])->name('student_warnings');
     route::get('amonestaciones/crear', [StudentWarningController::class, 'create'])->name('student_warnings.create');
